@@ -2,12 +2,16 @@ package com.epam.rd.java.basic.practice5;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Part3 {
 
     private int counter;
     private int counter2;
     private final int quantityThreads = 10;
+    private static final Logger LOGGER = Logger.getLogger(Part3.class.getName());
+
 
     public static void main(final String[] args) {
 
@@ -22,14 +26,12 @@ public class Part3 {
         ExecutorService executorService = Executors.newFixedThreadPool(quantityThreads);
 
         for(int i = 0; i < quantityThreads; i++){
+
             Thread thread = new Thread(new MyThread());
             executorService.execute(thread);
-            
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            thread.interrupt();
+
+
         }
 
         executorService.shutdown();
@@ -46,17 +48,12 @@ public class Part3 {
 
                 Thread thread = new Thread(new MyThread());
                 executorService.execute(thread);
-
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                thread.interrupt();
 
             }
         }
 
-        executorService.shutdown();
+        executorService.shutdownNow();
 
     }
 
@@ -74,10 +71,11 @@ public class Part3 {
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOGGER.log(Level.SEVERE, "InterruptedException", e);
             }
 
             counter2++;
+
 
         }
     }
