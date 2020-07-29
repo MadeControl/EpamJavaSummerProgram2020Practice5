@@ -16,7 +16,7 @@ public class Part1 {
 
             myThread1.join();
             myThread2.join();
-            
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

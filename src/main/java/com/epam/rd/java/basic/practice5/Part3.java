@@ -22,11 +22,17 @@ public class Part3 {
         ExecutorService executorService = Executors.newFixedThreadPool(quantityThreads);
 
         for(int i = 0; i < quantityThreads; i++){
-            executorService.execute(new MyThread());
+            Thread thread = new Thread(new MyThread());
+            executorService.execute(thread);
+            
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         executorService.shutdown();
-
 
     }
 
@@ -37,9 +43,17 @@ public class Part3 {
         for(int i = 0; i < quantityThreads; i++){
 
             synchronized (this) {
-                executorService.execute(new MyThread());
-            }
 
+                Thread thread = new Thread(new MyThread());
+                executorService.execute(thread);
+
+                try {
+                    thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
         }
 
         executorService.shutdown();
