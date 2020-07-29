@@ -8,11 +8,10 @@ public class Part1 {
 
         MyThread1 myThread1 = new MyThread1();
         myThread1.start();
+        myThread1.interrupt();
 
         Thread myThread2 = new Thread(new MyThread2());
         myThread2.start();
-
-        myThread1.interrupt();
         myThread2.interrupt();
 
     }
