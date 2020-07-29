@@ -1,8 +1,12 @@
 package com.epam.rd.java.basic.practice5;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Part1 {
 
     private static final double TIME = (double) 1/3;
+    private static final Logger LOGGER = Logger.getLogger(Part1.class.getName());
 
     public static void main(String[] args) {
 
@@ -15,10 +19,17 @@ public class Part1 {
         try {
 
             myThread1.join();
+
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.SEVERE, "InterruptedException", e);
+        }
+
+        try {
+
             myThread2.join();
 
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "InterruptedException", e);
         }
 
     }

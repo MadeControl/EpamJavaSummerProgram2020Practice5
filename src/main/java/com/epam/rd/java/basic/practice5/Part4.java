@@ -1,7 +1,6 @@
 package com.epam.rd.java.basic.practice5;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

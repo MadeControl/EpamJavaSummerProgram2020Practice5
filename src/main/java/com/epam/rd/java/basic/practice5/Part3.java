@@ -9,13 +9,14 @@ public class Part3 {
 
     private int counter;
     private int counter2;
-    private final int quantityThreads = 10;
+    private static final int QUANTITY_THREADS = 10;
     private static final Logger LOGGER = Logger.getLogger(Part3.class.getName());
 
 
     public static void main(final String[] args) {
 
         Part3 part3 = new Part3();
+
         part3.compare();
         part3.compareSync();
 
@@ -23,32 +24,27 @@ public class Part3 {
 
     public void compare() {
 
-        ExecutorService executorService = Executors.newFixedThreadPool(quantityThreads);
+        ExecutorService executorService = Executors.newFixedThreadPool(QUANTITY_THREADS);
 
-        for(int i = 0; i < quantityThreads; i++){
+        for(int i = 0; i < QUANTITY_THREADS; i++){
 
-            Thread thread = new Thread(new MyThread());
-            executorService.execute(thread);
-            thread.interrupt();
-
+            executorService.submit(new MyThread());
 
         }
 
-        executorService.shutdown();
+        executorService.shutdownNow();
 
     }
 
     public void compareSync() {
 
-        ExecutorService executorService = Executors.newFixedThreadPool(quantityThreads);
+        ExecutorService executorService = Executors.newFixedThreadPool(QUANTITY_THREADS);
 
-        for(int i = 0; i < quantityThreads; i++){
+        for(int i = 0; i < QUANTITY_THREADS; i++){
 
             synchronized (this) {
 
-                Thread thread = new Thread(new MyThread());
-                executorService.execute(thread);
-                thread.interrupt();
+                executorService.submit(new MyThread());
 
             }
         }
