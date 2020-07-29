@@ -12,6 +12,9 @@ public class Part1 {
         Thread myThread2 = new Thread(new MyThread2());
         myThread2.start();
 
+        myThread1.interrupt();
+        myThread2.interrupt();
+
     }
 
     private static class MyThread1 extends Thread {

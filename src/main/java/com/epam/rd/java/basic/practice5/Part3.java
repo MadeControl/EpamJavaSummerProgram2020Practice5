@@ -30,12 +30,16 @@ public class Part3 {
 
     }
 
-    public synchronized void compareSync() {
+    public void compareSync() {
 
         ExecutorService executorService = Executors.newFixedThreadPool(quantityThreads);
 
         for(int i = 0; i < quantityThreads; i++){
-            executorService.execute(new MyThread());
+
+            synchronized (this) {
+                executorService.execute(new MyThread());
+            }
+
         }
 
         executorService.shutdown();
