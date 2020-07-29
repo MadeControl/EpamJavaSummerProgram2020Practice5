@@ -8,11 +8,18 @@ public class Part1 {
 
         MyThread1 myThread1 = new MyThread1();
         myThread1.start();
-        myThread1.interrupt();
 
         Thread myThread2 = new Thread(new MyThread2());
         myThread2.start();
-        myThread2.interrupt();
+
+        try {
+
+            myThread1.join();
+            myThread2.join();
+            
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
