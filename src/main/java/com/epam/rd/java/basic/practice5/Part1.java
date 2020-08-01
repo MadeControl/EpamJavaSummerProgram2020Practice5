@@ -7,14 +7,14 @@ public class Part1 {
 
     public static void main(String[] args) {
 
-        MyThread1 myThread1 = new MyThread1();
+        Thread myThread1 = new MyThread1();
         myThread1.start();
 
         Thread myThread2 = new Thread(new MyThread2());
         myThread2.start();
 
-        myThread1.interrupt();
-        myThread2.interrupt();
+//        myThread1.join();
+//        myThread2.join();
 
     }
 
@@ -30,7 +30,7 @@ public class Part1 {
 
                 System.out.println(threadName);
                 timePassed += TIME;
-                
+
             }
 
         }
