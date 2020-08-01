@@ -9,8 +9,14 @@ public class Part3 {
 
     private int counter;
     private int counter2;
-    private static final int QUANTITY_THREADS = 10;
+    private int QUANTITY_THREADS = 10;
     private static final Logger LOGGER = Logger.getLogger(Part3.class.getName());
+
+    public Part3() { }
+
+    public Part3(int numberOfThreads, int numberOfIterations) {
+        this.QUANTITY_THREADS = numberOfThreads;
+    }
 
 
     public static void main(final String[] args) {
