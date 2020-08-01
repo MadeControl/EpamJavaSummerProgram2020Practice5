@@ -12,44 +12,10 @@ public class Part4 {
 
     public static void main(final String[] args) {
 
-        String matrixDigitsInString = readFromFile();
-        matrixDigits = returnMatrixDigits(matrixDigitsInString);
 
-        System.out.println(executeWithSingleThreading());
 
     }
 
-//    private static String executeWithMultiThreading(){
-//
-//        StringBuilder stringBuilder = new StringBuilder();
-//
-//
-//    }
-
-    private static String executeWithSingleThreading(){
-
-        int maxValue = 0;
-        long startTime = System.currentTimeMillis();
-
-        Thread singleThread = new Thread(() -> System.out.println());
-
-        for(int[] array : matrixDigits){
-
-            for(int digit : array){
-
-                if(maxValue < digit){
-                    maxValue = digit;
-                }
-
-            }
-
-        }
-
-        long endTime = System.currentTimeMillis();
-
-        return maxValue + System.lineSeparator() + (endTime - startTime);
-
-    }
 
     private static int[][] returnMatrixDigits(String matrixDigitsInString){
 

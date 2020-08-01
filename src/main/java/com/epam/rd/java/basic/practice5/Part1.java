@@ -11,54 +11,54 @@ public class Part1 {
 
     public static void main(String[] args) {
 
-        Thread myThread1 = new MyThread1();
-        myThread1.start();
-
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            LOGGER.log(Level.SEVERE, "Interrupted exception", e);
-        }
-
-        Thread myThread2 = new Thread(new MyThread2());
-        myThread2.start();
+//        Thread myThread1 = new MyThread1();
+//        myThread1.start();
+//
+//        try {
+//            Thread.sleep(500);
+//        } catch (InterruptedException e) {
+//            LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+//        }
+//
+//        Thread myThread2 = new Thread(new MyThread2());
+//        myThread2.start();
 
     }
 
-    private static class MyThread1 extends Thread {
-
-        @Override
-        public void run() {
-
-            double timePassed = 0;
-            String threadName = this.getName();
-
-            while (timePassed <= 2.0) {
-
-                System.out.println(threadName);
-                timePassed += TIME;
-
-            }
-
-        }
-    }
-
-    private static class MyThread2 implements Runnable {
-
-        @Override
-        public void run() {
-
-            double timePassed = 0;
-            String threadName = Thread.currentThread().getName();
-
-            while (timePassed <= 2.0) {
-
-                System.out.println(threadName);
-                timePassed += TIME;
-
-            }
-
-        }
-    }
+//    private static class MyThread1 extends Thread {
+//
+//        @Override
+//        public void run() {
+//
+//            double timePassed = 0;
+//            String threadName = this.getName();
+//
+//            while (timePassed <= 2.0) {
+//
+//                System.out.println(threadName);
+//                timePassed += TIME;
+//
+//            }
+//
+//        }
+//    }
+//
+//    private static class MyThread2 implements Runnable {
+//
+//        @Override
+//        public void run() {
+//
+//            double timePassed = 0;
+//            String threadName = Thread.currentThread().getName();
+//
+//            while (timePassed <= 2.0) {
+//
+//                System.out.println(threadName);
+//                timePassed += TIME;
+//
+//            }
+//
+//        }
+//    }
 
 }
