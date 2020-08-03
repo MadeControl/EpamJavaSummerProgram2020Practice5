@@ -20,7 +20,7 @@ public class Part1 {
         @Override
         public void run() {
 
-            double timePassed = 0;
+            double timePassed = TIME;
             String threadName = this.getName();
 
             while (timePassed <= 2.0) {
@@ -38,7 +38,7 @@ public class Part1 {
         @Override
         public void run() {
 
-            double timePassed = 0;
+            double timePassed = TIME;
             String threadName = Thread.currentThread().getName();
 
             while (timePassed <= 2.0) {
