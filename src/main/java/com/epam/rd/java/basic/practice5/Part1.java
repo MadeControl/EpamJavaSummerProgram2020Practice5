@@ -19,10 +19,33 @@ public class Part1 {
             TimeUnit.MILLISECONDS.sleep(2000);
         } catch (InterruptedException e) {
             LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+            Thread.currentThread().interrupt();
         }
 
         Thread myThread2 = new Thread(new MyThread2());
         myThread2.start();
+
+    }
+
+    private static void myRun(){
+
+        double timePassed = TIME;
+        long timeEvery = (long) (TIME * 1000);
+        String threadName = Thread.currentThread().getName();
+
+        while (timePassed <= 2.0) {
+
+            System.out.println(threadName);
+            timePassed += TIME;
+
+            try {
+                Thread.sleep(timeEvery);
+            } catch (InterruptedException e) {
+                LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+                Thread.currentThread().interrupt();
+            }
+
+        }
 
     }
 
@@ -31,22 +54,7 @@ public class Part1 {
         @Override
         public void run() {
 
-            double timePassed = TIME;
-            long timeEvery = (long) (TIME * 1000);
-            String threadName = this.getName();
-
-            while (timePassed <= 2.0) {
-
-                System.out.println(threadName);
-                timePassed += TIME;
-
-                try {
-                    Thread.sleep(timeEvery);
-                } catch (InterruptedException e) {
-                    LOGGER.log(Level.SEVERE, "Interrupted exception", e);
-                }
-
-            }
+            myRun();
 
         }
     }
@@ -56,22 +64,7 @@ public class Part1 {
         @Override
         public void run() {
 
-            double timePassed = TIME;
-            long timeEvery = (long) (TIME * 1000);
-            String threadName = Thread.currentThread().getName();
-
-            while (timePassed <= 2.0) {
-
-                System.out.println(threadName);
-                timePassed += TIME;
-
-                try {
-                    Thread.sleep(timeEvery);
-                } catch (InterruptedException e) {
-                    LOGGER.log(Level.SEVERE, "Interrupted exception", e);
-                }
-
-            }
+            myRun();
 
         }
     }
