@@ -83,7 +83,7 @@ public class Part3 {
         @Override
         public void run() {
 
-            System.out.println(counter == counter2);
+            System.out.println(counter + " " + counter2);
 
             counter++;
 

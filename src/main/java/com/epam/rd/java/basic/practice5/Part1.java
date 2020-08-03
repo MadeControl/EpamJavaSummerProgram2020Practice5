@@ -32,12 +32,19 @@ public class Part1 {
         public void run() {
 
             double timePassed = TIME;
+            long timeEvery = (long) (TIME * 1000);
             String threadName = this.getName();
 
             while (timePassed <= 2.0) {
 
                 System.out.println(threadName);
                 timePassed += TIME;
+
+                try {
+                    Thread.sleep(timeEvery);
+                } catch (InterruptedException e) {
+                    LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+                }
 
             }
 
@@ -50,12 +57,19 @@ public class Part1 {
         public void run() {
 
             double timePassed = TIME;
+            long timeEvery = (long) (TIME * 1000);
             String threadName = Thread.currentThread().getName();
 
             while (timePassed <= 2.0) {
 
                 System.out.println(threadName);
                 timePassed += TIME;
+
+                try {
+                    Thread.sleep(timeEvery);
+                } catch (InterruptedException e) {
+                    LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+                }
 
             }
 
