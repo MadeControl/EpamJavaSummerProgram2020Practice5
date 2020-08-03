@@ -15,15 +15,15 @@ public class Part1 {
         Thread myThread1 = new MyThread1();
         myThread1.start();
 
-        try {
-            TimeUnit.MILLISECONDS.sleep(2000);
-        } catch (InterruptedException e) {
-            LOGGER.log(Level.SEVERE, "Interrupted exception", e);
-            Thread.currentThread().interrupt();
-        }
-
-        Thread myThread2 = new Thread(new MyThread2());
-        myThread2.start();
+//        try {
+//            TimeUnit.MILLISECONDS.sleep(2000);
+//        } catch (InterruptedException e) {
+//            LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+//            Thread.currentThread().interrupt();
+//        }
+//
+//        Thread myThread2 = new Thread(new MyThread2());
+//        myThread2.start();
 
     }
 
@@ -55,6 +55,8 @@ public class Part1 {
         public void run() {
 
             myRun();
+            Thread myThread2 = new Thread(new MyThread2());
+            myThread2.start();
 
         }
     }

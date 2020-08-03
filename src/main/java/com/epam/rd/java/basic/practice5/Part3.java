@@ -91,6 +91,7 @@ public class Part3 {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
                 LOGGER.log(Level.SEVERE, "InterruptedException", e);
+                Thread.currentThread().interrupt();
             }
 
             counter2++;
