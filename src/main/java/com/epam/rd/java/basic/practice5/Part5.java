@@ -15,8 +15,6 @@ public class Part5 {
     private static int seek;
     private static int index;
 
-    public Part5() {}
-
     public static void main(final String[] args) {
 
         String content = "";
@@ -74,7 +72,12 @@ public class Part5 {
                         file.writeBytes(data);
                         seek++;
 
-                        Thread.sleep(1);
+                        try {
+                            Thread.sleep(1);
+                        } catch (InterruptedException e) {
+                            LOGGER.warning(e.getMessage());
+                            Thread.currentThread().interrupt();
+                        }
 
                     }
 
@@ -82,9 +85,8 @@ public class Part5 {
                     file.writeBytes(System.lineSeparator());
                     seek++;
 
-                } catch (IOException | InterruptedException e) {
+                } catch (IOException e) {
                     LOGGER.warning(e.getMessage());
-                    Thread.currentThread().interrupt();
                 }
                 index++;
 

@@ -93,7 +93,7 @@ public class Spam {
         @Override
         public void run() {
 
-            while (!isInterrupted()) {
+            while (!isAlive()) {
                 threadAction();
             }
         }
