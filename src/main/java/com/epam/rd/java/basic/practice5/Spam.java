@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 public class Spam {
 
     private static final Logger LOGGER = Logger.getLogger(Spam.class.getName());
+    private static final String MESSAGE_INTERRUPTED_EXCEPTION = "Interrupted exception";
     private Thread[] threads;
     private final String[] messages;
     private final int[] times;
@@ -54,6 +55,16 @@ public class Spam {
             thread.interrupt();
         }
 
+        for(Thread thread : threads) {
+
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                LOGGER.log(Level.SEVERE, MESSAGE_INTERRUPTED_EXCEPTION, e);
+                Thread.currentThread().interrupt();
+            }
+        }
+
     }
 
     private void waitPrintEnter() {
@@ -63,15 +74,16 @@ public class Spam {
             while (!((bufferedReader.readLine()).equals("")));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "IOException exception", e);
+            Thread.currentThread().interrupt();
         }
 
     }
 
     private static class Worker extends Thread {
 
-        private String message;
-        private int time;
+        private final String message;
+        private final int time;
 
         public Worker(String message, int time) {
             this.message = message;
@@ -93,7 +105,7 @@ public class Spam {
             try {
                 Thread.sleep(time);
             } catch (InterruptedException e) {
-                LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+                LOGGER.log(Level.SEVERE, MESSAGE_INTERRUPTED_EXCEPTION, e);
                 Thread.currentThread().interrupt();
             }
         }

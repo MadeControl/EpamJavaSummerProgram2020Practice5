@@ -33,7 +33,6 @@ public class Part2 {
 
         private int index;
 
-        @Override
         public int read() {
 
             byte[] separatorArray = System.lineSeparator().getBytes();
