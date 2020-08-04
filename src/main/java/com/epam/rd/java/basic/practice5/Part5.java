@@ -2,8 +2,6 @@ package com.epam.rd.java.basic.practice5;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 public class Part5 {
@@ -21,9 +19,10 @@ public class Part5 {
 
     public static void main(final String[] args) {
 
+        String content = "";
+
         try {
 
-//            Files.delete(Paths.get(FILE_NAME));
             file = new RandomAccessFile(FILE_NAME, ACCESS_FILE);
             seek = 0;
             index = 0;
@@ -45,13 +44,16 @@ public class Part5 {
                         .append(System.lineSeparator());
             }
 
-            System.out.print(stringBuilder.toString());
+            content = stringBuilder.toString();
 
             file.close();
 
         } catch (IOException | InterruptedException e) {
             LOGGER.warning(e.getMessage());
+            Thread.currentThread().interrupt();
         }
+
+        System.out.print(content);
 
     }
 
@@ -82,6 +84,7 @@ public class Part5 {
 
                 } catch (IOException | InterruptedException e) {
                     LOGGER.warning(e.getMessage());
+                    Thread.currentThread().interrupt();
                 }
                 index++;
 

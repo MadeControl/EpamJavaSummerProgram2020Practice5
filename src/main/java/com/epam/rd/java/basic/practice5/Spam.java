@@ -14,7 +14,7 @@ public class Spam {
     private String[] messages = new String[] { "@@@", "bbbbbbb" };
     private int[] times = new int[] { 333, 222 };
 
-    public Spam(final String[] messages, final int[] delays) {
+    public Spam(String[] messages, int[] delays) {
         this.messages = messages;
         this.times = delays;
     }
@@ -23,11 +23,9 @@ public class Spam {
 
     public static void main(final String[] args) {
 
-
         Spam spam = new Spam();
 
         spam.start();
-        spam.stop();
 
     }
 
@@ -47,6 +45,7 @@ public class Spam {
         }
 
         waitPrintEnter();
+        stop();
 
     }
 
