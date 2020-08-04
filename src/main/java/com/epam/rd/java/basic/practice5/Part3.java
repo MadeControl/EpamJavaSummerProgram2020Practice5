@@ -17,12 +17,12 @@ public class Part3 {
         this.numberOfThreads = numberOfThreads;
         this.numberOfIterations = numberOfIterations;
     }
-    
+
     public static void main(final String[] args) {
 
         Part3 part3 = new Part3(5, 10);
 
-        part3.compare();
+//        part3.compare();
         part3.compareSync();
 
     }
@@ -33,7 +33,7 @@ public class Part3 {
      * print "counter == counter2" and increase counters.
      * Between increasing first and second counter
      * must be delay equals 100 milliseconds.
-     *
+     * <p>
      * This method should wait until threads will finish their work.
      */
 
@@ -41,9 +41,9 @@ public class Part3 {
 
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
 
-        for(int i = 0; i < numberOfIterations; i++){
+        for (int i = 0; i < numberOfIterations; i++) {
 
-            executorService.submit(new MyThread());
+            executorService.submit(new Thread(new MyNotSynchronizedThread()));
 
         }
 
@@ -57,7 +57,7 @@ public class Part3 {
      * print "counter == counter2" and increase counters.
      * Between increasing first and second counter
      * must be delay equals 100 milliseconds.
-     *
+     * <p>
      * This method should wait until threads will finish their work.
      */
 
@@ -65,37 +65,53 @@ public class Part3 {
 
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
 
-        for(int i = 0; i < numberOfIterations; i++){
+        for (int i = 0; i < numberOfIterations; i++) {
 
-            synchronized (this) {
+            executorService.submit(new Thread(new MySynchronizedThread()));
 
-                executorService.submit(new MyThread());
-
-            }
         }
 
         executorService.shutdown();
 
     }
 
-    private class MyThread implements Runnable {
+    private void myRun(){
+
+        System.out.println(counter + " == " + counter2);
+
+        counter++;
+
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.SEVERE, "InterruptedException", e);
+            Thread.currentThread().interrupt();
+        }
+
+        counter2++;
+
+    }
+
+    private class MyNotSynchronizedThread implements Runnable {
 
         @Override
         public void run() {
 
-            System.out.println(counter + " " + counter2);
+            myRun();
 
-            counter++;
+        }
+    }
 
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                LOGGER.log(Level.SEVERE, "InterruptedException", e);
-                Thread.currentThread().interrupt();
+    private class MySynchronizedThread implements Runnable {
+
+        @Override
+        public void run() {
+
+            synchronized (this) {
+
+                myRun();
+
             }
-
-            counter2++;
-
 
         }
     }
