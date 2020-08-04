@@ -23,7 +23,7 @@ public class Part3 {
         Part3 part3 = new Part3(5, 10);
 
 //        part3.compare();
-        part3.compareSync();
+//        part3.compareSync();
 
     }
 
