@@ -7,6 +7,7 @@ public class Demo {
         final String[] arg = {};
 
         Part1.main(arg);
+        Part2.main(arg);
 
     }
 
