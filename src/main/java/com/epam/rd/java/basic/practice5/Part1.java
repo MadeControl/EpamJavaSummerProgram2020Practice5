@@ -7,6 +7,7 @@ public class Part1 {
 
     private static final double TIME = (double) 1/2;
     private static final Logger LOGGER = Logger.getLogger(Part1.class.getName());
+    private static final String MESSAGE_INTERRUPTED_EXCEPTION = "Interrupted exception";
 
     public static void main(String[] args) {
 
@@ -16,7 +17,7 @@ public class Part1 {
         try {
             myThread1.join();
         } catch (InterruptedException e) {
-            LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+            LOGGER.log(Level.SEVERE, MESSAGE_INTERRUPTED_EXCEPTION, e);
             Thread.currentThread().interrupt();
         }
 
@@ -26,7 +27,7 @@ public class Part1 {
         try {
             myThread2.join();
         } catch (InterruptedException e) {
-            LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+            LOGGER.log(Level.SEVERE, MESSAGE_INTERRUPTED_EXCEPTION, e);
             Thread.currentThread().interrupt();
         }
 
@@ -47,7 +48,7 @@ public class Part1 {
             try {
                 Thread.sleep(timeEvery);
             } catch (InterruptedException e) {
-                LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+                LOGGER.log(Level.SEVERE, MESSAGE_INTERRUPTED_EXCEPTION, e);
                 Thread.currentThread().interrupt();
             }
 
@@ -55,7 +56,7 @@ public class Part1 {
 
     }
 
-    private static class MyThread1 extends Thread {
+    public static class MyThread1 extends Thread {
 
         @Override
         public void run() {
@@ -65,7 +66,7 @@ public class Part1 {
         }
     }
 
-    private static class MyThread2 implements Runnable {
+    public static class MyThread2 implements Runnable {
 
         @Override
         public void run() {
