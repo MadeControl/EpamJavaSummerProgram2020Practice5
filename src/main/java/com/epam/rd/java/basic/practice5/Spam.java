@@ -17,6 +17,7 @@ public class Spam {
     public Spam(String[] messages, int[] delays) {
         this.messages = messages;
         this.times = delays;
+        this.threads = new Thread[messages.length];
     }
 
     public static void main(final String[] args) {
@@ -26,7 +27,6 @@ public class Spam {
 
         Spam spam = new Spam(messages, times);
 
-        spam.threads = new Thread[messages.length];
 
         spam.start();
         spam.waitPrintEnter();
@@ -69,7 +69,7 @@ public class Spam {
 
     private void waitPrintEnter() {
 
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));) {
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in))) {
 
             while (!((bufferedReader.readLine()).equals("")));
 
@@ -80,7 +80,7 @@ public class Spam {
 
     }
 
-    private static class Worker extends Thread {
+    public static class Worker extends Thread {
 
         private final String message;
         private final int time;
