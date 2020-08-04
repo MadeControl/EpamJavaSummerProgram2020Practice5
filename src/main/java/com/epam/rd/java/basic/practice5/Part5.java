@@ -23,7 +23,7 @@ public class Part5 {
 
         try {
 
-            Files.delete(Paths.get(FILE_NAME));
+//            Files.delete(Paths.get(FILE_NAME));
             file = new RandomAccessFile(FILE_NAME, ACCESS_FILE);
             seek = 0;
             index = 0;
