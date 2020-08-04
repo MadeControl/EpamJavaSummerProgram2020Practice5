@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 
 public class Part3 {
 
-    private int counter;
-    private int counter2;
+    private volatile int counter;
+    private volatile int counter2;
     private final int numberOfThreads;
     private final int numberOfIterations;
     private static final Logger LOGGER = Logger.getLogger(Part3.class.getName());
@@ -22,8 +22,8 @@ public class Part3 {
 
         Part3 part3 = new Part3(5, 10);
 
-//        part3.compare();
-//        part3.compareSync();
+        part3.compare();
+        part3.compareSync();
 
     }
 
@@ -41,7 +41,7 @@ public class Part3 {
 
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
 
-        for (int i = 0; i < numberOfIterations; i++) {
+        for (int i = 0; i < numberOfThreads; i++) {
 
             executorService.submit(new Thread(new MyNotSynchronizedThread()));
 
@@ -65,7 +65,7 @@ public class Part3 {
 
         ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
 
-        for (int i = 0; i < numberOfIterations; i++) {
+        for (int i = 0; i < numberOfThreads; i++) {
 
             executorService.submit(new Thread(new MySynchronizedThread()));
 
@@ -97,7 +97,9 @@ public class Part3 {
         @Override
         public void run() {
 
-            myRun();
+            for(int i = 0; i < numberOfIterations; i++){
+                myRun();
+            }
 
         }
     }
@@ -109,7 +111,9 @@ public class Part3 {
 
             synchronized (this) {
 
-                myRun();
+                for(int i = 0; i < numberOfIterations; i++){
+                    myRun();
+                }
 
             }
 

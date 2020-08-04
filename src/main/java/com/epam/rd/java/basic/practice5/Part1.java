@@ -1,6 +1,5 @@
 package com.epam.rd.java.basic.practice5;
 
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +14,7 @@ public class Part1 {
         myThread1.start();
 
         try {
-            TimeUnit.MILLISECONDS.sleep(2000);
+            myThread1.join();
         } catch (InterruptedException e) {
             LOGGER.log(Level.SEVERE, "Interrupted exception", e);
             Thread.currentThread().interrupt();
@@ -23,6 +22,13 @@ public class Part1 {
 
         Thread myThread2 = new Thread(new MyThread2());
         myThread2.start();
+
+        try {
+            myThread2.join();
+        } catch (InterruptedException e) {
+            LOGGER.log(Level.SEVERE, "Interrupted exception", e);
+            Thread.currentThread().interrupt();
+        }
 
     }
 
