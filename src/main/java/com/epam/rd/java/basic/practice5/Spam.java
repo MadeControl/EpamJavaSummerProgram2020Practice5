@@ -11,27 +11,30 @@ public class Spam {
     private static final Logger LOGGER = Logger.getLogger(Spam.class.getName());
     private static final String MESSAGE_INTERRUPTED_EXCEPTION = "Interrupted exception";
     private Thread[] threads;
-    private String[] messages = new String[] { "@@@", "bbbbbbb" };
-    private int[] times = new int[] { 333, 222 };
+    private String[] messages;
+    private int[] times;
 
     public Spam(String[] messages, int[] delays) {
         this.messages = messages;
         this.times = delays;
     }
 
-    public Spam() {}
-
     public static void main(final String[] args) {
 
-        Spam spam = new Spam();
+        String[] messages = new String[] { "@@@", "bbbbbbb" };
+        int[] times = new int[] { 333, 222 };
+
+        Spam spam = new Spam(messages, times);
+
+        spam.threads = new Thread[messages.length];
 
         spam.start();
+        spam.waitPrintEnter();
+        spam.stop();
 
     }
 
     public void start() {
-
-        threads = new Thread[messages.length];
 
         for(int i = 0; i < messages.length; i++) {
 
@@ -43,9 +46,6 @@ public class Spam {
             thread.start();
 
         }
-
-        waitPrintEnter();
-        stop();
 
     }
 
@@ -93,7 +93,7 @@ public class Spam {
         @Override
         public void run() {
 
-            while (!isAlive()) {
+            while (!isInterrupted()) {
                 threadAction();
             }
         }

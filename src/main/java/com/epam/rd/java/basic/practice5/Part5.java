@@ -2,6 +2,7 @@ package com.epam.rd.java.basic.practice5;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 public class Part5 {
@@ -72,12 +73,7 @@ public class Part5 {
                         file.writeBytes(data);
                         seek++;
 
-                        try {
-                            Thread.sleep(1);
-                        } catch (InterruptedException e) {
-                            LOGGER.warning(e.getMessage());
-                            Thread.currentThread().interrupt();
-                        }
+                        TimeUnit.MILLISECONDS.sleep(1);
 
                     }
 
@@ -85,8 +81,9 @@ public class Part5 {
                     file.writeBytes(System.lineSeparator());
                     seek++;
 
-                } catch (IOException e) {
+                } catch (IOException | InterruptedException e) {
                     LOGGER.warning(e.getMessage());
+                    Thread.currentThread().interrupt();
                 }
                 index++;
 
