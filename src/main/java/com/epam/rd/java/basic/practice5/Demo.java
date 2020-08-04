@@ -8,6 +8,9 @@ public class Demo {
 
         Part1.main(arg);
         Part2.main(arg);
+        Part3.main(arg);
+        Part4.main(arg);
+        Part5.main(arg);
 
     }
 

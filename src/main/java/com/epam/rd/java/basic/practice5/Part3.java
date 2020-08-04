@@ -7,11 +7,11 @@ public class Part3 {
 
     private static final Logger LOGGER = Logger.getLogger(Part3.class.getName());
     private static final String MESSAGE_INTERRUPTED_EXCEPTION = "Interrupted exception";
+    private final Object mutex = new Object();
     private int counter;
     private int counter2;
     private final int numberOfThreads;
     private final int numberOfIterations;
-    private final Object MUTEX = new Object();
 
     public Part3(int numberOfThreads, int numberOfIterations) {
 
@@ -137,7 +137,7 @@ public class Part3 {
         @Override
         public void run() {
 
-            synchronized (MUTEX) {
+            synchronized (mutex) {
 
                 myRun();
 
