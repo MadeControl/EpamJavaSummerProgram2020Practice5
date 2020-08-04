@@ -32,7 +32,9 @@ public class Part2 {
     public static class MyInputStream extends InputStream {
 
         private int index;
+        int indexN;
 
+        @Override
         public int read() {
 
             byte[] separatorArray = System.lineSeparator().getBytes();
@@ -51,9 +53,29 @@ public class Part2 {
             index++;
             return separatorArray[0] & 0xFF;
 
-
         }
 
+        @Override
+        public int read(byte[] b,int in,int itr) {
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                LOGGER.log(Level.SEVERE, MESSAGE_INTERRUPTED_EXCEPTION, e);
+                Thread.currentThread().interrupt();
+            }
+
+            byte [] separatorArr = System.lineSeparator().getBytes();
+
+            if (indexN != 0) {
+                return -1;
+            }
+
+            indexN++;
+            b[0] = (byte) (separatorArr[0] & 0xFF);
+
+            return 1;
+        }
     }
 
 }
